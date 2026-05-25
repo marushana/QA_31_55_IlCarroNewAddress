@@ -39,7 +39,9 @@ public class HelperBase {
         WebElement element = wd.findElement(locator);
         element.click();
     }
-
+    public void submit(){
+        click(By.xpath("//*[text() = 'Y’alla!']"));
+    }
     public void pause(int time){
         try {
             Thread.sleep(time);
