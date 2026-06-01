@@ -40,7 +40,7 @@ public class HelperBase {
         element.click();
     }
     public void submit(){
-        click(By.xpath("//*[text() = 'Y’alla!']"));
+        click(By.xpath("//button[@type = 'submit']"));
     }
     public void pause(int time){
         try {
