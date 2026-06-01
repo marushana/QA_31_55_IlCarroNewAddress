@@ -77,15 +77,34 @@ public class HelperCar extends HelperBase {
 
         LocalDate from = LocalDate.parse(dateFrom, DateTimeFormatter.ofPattern("M/d/yyyy"));
         LocalDate to = LocalDate.parse(dateTo, DateTimeFormatter.ofPattern("M/d/yyyy"));
-        int diffMonth = from.getMonthValue() - month;
-        if (diffMonth > 0) {
+        int diffYear;
+        diffYear = from.getYear() - now.getYear();
+        int diffMonth;
+        if (diffYear == 0){
+            diffMonth = from.getMonthValue()-now.getMonthValue();
+        }else{
+            diffMonth = 12-now.getMonthValue()+from.getDayOfMonth();
+        }
+        clickNextMontBtn(diffMonth);
+        click(By.xpath("//button[not(contains(@class, 'rdrDayPassive'))][not(contains(@class, 'rdrDayDisabled'))]//span[text()='" + from.getDayOfMonth() + "']"));
+
+        /// //////////////////
+
+        diffYear = to.getYear()-from.getYear();
+
+        if (diffYear == 0) {
+            diffMonth = to.getMonthValue() - from.getMonthValue();
+        }else {
+            diffMonth = 12-from.getMonthValue()+to.getDayOfMonth();
             clickNextMontBtn(diffMonth);
         }
-        click(By.xpath("//span[text() = '" + from.getDayOfMonth() + "']"));
-        diffMonth = to.getMonthValue() - from.getMonthValue();
-        if (diffMonth > 0) {
-            clickNextMontBtn(diffMonth);
-        }
-        click(By.xpath("//span[text()='" + to.getDayOfMonth() + "']"));
+        clickNextMontBtn(diffMonth);
+        click(By.xpath("//button[not(contains(@class, 'rdrDayPassive'))][not(contains(@class, 'rdrDayDisabled'))]//span[text()='" + to.getDayOfMonth() + "']"));
+
+    }
+
+
+    public void clickLogo() {
+        click(By.cssSelector(".header>a.logo"));
     }
 }
